@@ -1,10 +1,15 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Counter } from './Counter'
+import About from './pages/About'
+import Home from './pages/Home'
 
 export const App = () => {
   return (
-    <>
-      <h1>React TypeScript Webpack Starter Template</h1>
-      <Counter />
-    </>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/'  element={<Home />} />
+      <Route path='/details' element={<About />} />
+    </Routes>
+    </BrowserRouter>
   )
 }
