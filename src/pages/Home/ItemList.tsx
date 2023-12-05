@@ -87,8 +87,6 @@ const ItemList: FunctionComponent<ItemListProps> = React.memo((props) => {
   const { data: stocks, addItem, deleteItem, resetData } = useItemManagement();
   const [showForm, setShowForm] = useState<boolean>(false);
 
-  console.log(stocks)
-
   console.log(stocks, "stocks");
 
   const handleFormClose = () => {
@@ -97,7 +95,17 @@ const ItemList: FunctionComponent<ItemListProps> = React.memo((props) => {
 
   const handleAddNewData = (formData: TItems) => {
     addItem(formData);
+    handleFormClose()
   };
+
+
+  const showLink = (symbol : string) =>  {
+    const res =   items.findIndex((item) => item?.symbol === symbol)
+    if(res === -1) {
+        return false
+    }
+    return true
+  }
 
   return (
     <ItemListWrapper>
@@ -113,10 +121,11 @@ const ItemList: FunctionComponent<ItemListProps> = React.memo((props) => {
           </tr>
         </thead>
         <tbody>
-          {stocks.map((item) => (
+          {stocks.map((item) =>
+              (
             <tr key={item.symbol}>
               <td>
-                <Link to={`/details/${item.symbol}`}>{item.symbol}</Link>
+               {showLink(item.symbol)  ? <Link to={`/details/${item.symbol}`}>{item.symbol}</Link> :  `${item.symbol}`}
               </td>
               <td>{item.cname}</td>
               <td>{item.price}</td>

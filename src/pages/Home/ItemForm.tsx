@@ -1,7 +1,12 @@
-import React, { useState, useEffect, FunctionComponent, MouseEventHandler } from "react";
+import React, {
+  useState,
+  useEffect,
+  FunctionComponent,
+  MouseEventHandler,
+} from "react";
 import styled from "styled-components";
 
-const Modal = styled.div<{ show  : boolean}>`
+const Modal = styled.div<{ show: boolean }>`
   display: ${(props) => (props.show ? "block" : "none")};
   position: fixed;
   top: 0;
@@ -48,9 +53,9 @@ const Button = styled.button`
 `;
 
 export type TformData = {
-  symbol: string ;
-  cname: string ;
-  price: string ;
+  symbol: string;
+  cname: string;
+  price: string;
 };
 
 interface ItemFormProps {
@@ -59,65 +64,72 @@ interface ItemFormProps {
   onSubmit: (formData: TformData) => void;
 }
 
-const ItemForm: FunctionComponent<ItemFormProps> = React.memo(({
-  show,
-  onClose,
-  onSubmit,
-}) => {
-  const [formData, setFormData] = useState<TformData>({
-    cname: "",
-    price: "",
-    symbol: "",
-  });
+const ItemForm: FunctionComponent<ItemFormProps> = React.memo(
+  ({ show, onClose, onSubmit }) => {
+    const [formData, setFormData] = useState<TformData>({
+      cname: "",
+      price: "",
+      symbol: "",
+    });
 
-  const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-  const handleSubmit = () => {
-    onSubmit(formData);
-  };
+    const handleSubmit = () => {
+      onSubmit(formData);
+    };
 
-  return (
-    <Modal show={show} onClick={onClose}>
-      <ModalContent onClick={(e: { stopPropagation: () => void; }) => e.stopPropagation()}>
-        <h2>{"Add New Item"}</h2>
-        <Form>
-          <FormControl>
-            <label>Symbol</label>
-            <input
-              type="text"
-              placeholder="Enter  Symbol"
-              name="symbol"
-              value={formData.symbol}
-              onChange={handleChange}
-            />
-          </FormControl>
-          <FormControl>
-            <label>Company Name</label>
-            <input
-              type="text"
-              placeholder="Enter Company Name "
-              name="cname"
-              value={formData.cname}
-              onChange={handleChange}
-            />
-          </FormControl>
-          <FormControl>
-            <label>Price</label>
-            <input
-              type="text"
-              placeholder="Enter Price"
-              name="price"
-              value={formData.price}
-              onChange={handleChange}
-            />
-          </FormControl>
-          <Button onClick={handleSubmit}>{"Add Stock"}</Button>
-        </Form>
-      </ModalContent>
-    </Modal>
-  );
-});
+    return (
+      <Modal show={show} onClick={onClose}>
+        <ModalContent
+          onClick={(e: { stopPropagation: () => void }) => e.stopPropagation()}
+        >
+          <h2>{"Add New Item"}</h2>
+          <Form>
+            <FormControl>
+              <label>Symbol</label>
+              <input
+                type="text"
+                placeholder="Enter  Symbol"
+                name="symbol"
+                value={formData.symbol}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl>
+              <label>Company Name</label>
+              <input
+                type="text"
+                placeholder="Enter Company Name "
+                name="cname"
+                value={formData.cname}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <FormControl>
+              <label>Price</label>
+              <input
+                type="text"
+                placeholder="Enter Price"
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
+              />
+            </FormControl>
+            <Button
+              onClick={(e: { preventDefault: () => void }) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              {"Add Stock"}
+            </Button>
+          </Form>
+        </ModalContent>
+      </Modal>
+    );
+  }
+);
 
 export default ItemForm;
