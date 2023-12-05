@@ -6,7 +6,16 @@ const ItemListWrapper = styled.div`
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 24px;
+  @media (max-width: 600px) {
+    margin-top: 10px;
+    gap: 8px; 
+    padding: 0 16px;
+  }
+  @media (max-width: 400px) {
+    margin-top: 5px; 
+    font-size: 14px;
+  }
 `;
 
 const Button = styled.button`
@@ -15,19 +24,18 @@ const Button = styled.button`
   border: none;
   padding: 8px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
   width: 100%;
   height: 40px;
   min-height: 40px;
-  border-radius: 8px;
-  margin: auto;
+  text-align: center;
+  border-radius: 16px;
   :hover {
     background: rgb(49, 13, 117);
   }
   @media (max-width: 600px) {
     height: 20px;
     min-height: 28px;
+    border-radius: 8px;
   }
 `;
 
