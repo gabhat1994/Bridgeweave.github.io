@@ -83,9 +83,11 @@ const Table = styled.table`
 
 interface ItemListProps {}
 
-const ItemList: FunctionComponent<ItemListProps> = (props) => {
+const ItemList: FunctionComponent<ItemListProps> = React.memo((props) => {
   const { data: stocks, addItem, deleteItem, resetData } = useItemManagement();
   const [showForm, setShowForm] = useState<boolean>(false);
+
+  console.log(stocks)
 
   console.log(stocks, "stocks");
 
@@ -132,6 +134,6 @@ const ItemList: FunctionComponent<ItemListProps> = (props) => {
       />
     </ItemListWrapper>
   );
-};
+});
 
 export default ItemList;

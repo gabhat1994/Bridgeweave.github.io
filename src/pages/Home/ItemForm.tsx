@@ -59,7 +59,7 @@ interface ItemFormProps {
   onSubmit: (formData: TformData) => void;
 }
 
-const ItemForm: FunctionComponent<ItemFormProps> = ({
+const ItemForm: FunctionComponent<ItemFormProps> = React.memo(({
   show,
   onClose,
   onSubmit,
@@ -118,6 +118,6 @@ const ItemForm: FunctionComponent<ItemFormProps> = ({
       </ModalContent>
     </Modal>
   );
-};
+});
 
 export default ItemForm;
