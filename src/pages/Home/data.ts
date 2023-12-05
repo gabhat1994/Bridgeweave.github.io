@@ -1,23 +1,23 @@
 export const items : TItems[] = [
     {
-        id : "1",
-        name : "1",
-        description : "1",
+        symbol : "YESBANK",
+        cname : "YES BANK LTD.",
+        price : "17.05",
     },
     {
-        id : "2",
-        name : "1",
-        description : "1",
+        symbol : "RELINFRA",
+        cname : "RELIANCE INFRASTRUCTURE LTD.",
+        price : "174.85",
     },
     {
-        id : "3",
-        name : "1",
-        description : "1",
+        symbol : "IGL",
+        cname : "Inderprasath gas Ltd.",
+        price : "122",
     },
 ]
 
-type TItems = {
-    id : string;
-    name :  string;
-    description : string;
+export type TItems = {
+    symbol : string;
+    cname :  string;
+    price : string;
 }

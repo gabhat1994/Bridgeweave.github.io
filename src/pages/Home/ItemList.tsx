@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FunctionComponent } from "react";
 import styled from "styled-components";
 import { items } from "./data";
+import { useItemManagement } from "./useItemManagement";
 
 const ItemListWrapper = styled.div`
   margin-top: 20px;
@@ -81,28 +82,29 @@ const Table = styled.table`
 interface ItemListProps {}
 
 const ItemList: FunctionComponent<ItemListProps> = (props) => {
-  // ... (same as before)
+    const { items : stocks, addItem, deleteItem, resetData } = useItemManagement(items);
 
   return (
     <ItemListWrapper>
       <Button onClick={() => console.log("test")}>Add Item</Button>
+      <Button onClick={() => resetData()}>Reset Data</Button>
       <Table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
+            <th>Symbol Name</th>
+            <th>Company Name</th>
+            <th>Current Stock Price</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.description}</td>
+          {stocks.map((item) => (
+            <tr key={item.symbol}>
+              <td>{item.symbol}</td>
+              <td>{item.cname}</td>
+              <td>{item.price}</td>
               <td>
-                <Button onClick={() => console.log(item.id)}>Delete</Button>
+                <Button onClick={() => deleteItem(item.symbol)}>Delete</Button>
               </td>
             </tr>
           ))}
