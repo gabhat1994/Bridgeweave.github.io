@@ -1,4 +1,5 @@
 import React, { useState, useEffect, FunctionComponent } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { items, TItems } from "./data";
 import ItemForm from "./ItemForm";
@@ -84,16 +85,15 @@ interface ItemListProps {}
 
 const ItemList: FunctionComponent<ItemListProps> = (props) => {
   const { data: stocks, addItem, deleteItem, resetData } = useItemManagement();
-  const [showForm, setShowForm] = useState<boolean>(false);  
+  const [showForm, setShowForm] = useState<boolean>(false);
 
-  console.log(stocks, "stocks")
+  console.log(stocks, "stocks");
 
   const handleFormClose = () => {
     setShowForm(false);
   };
 
   const handleAddNewData = (formData: TItems) => {
-    console.log(formData, "new data");
     addItem(formData);
   };
 
@@ -113,7 +113,9 @@ const ItemList: FunctionComponent<ItemListProps> = (props) => {
         <tbody>
           {stocks.map((item) => (
             <tr key={item.symbol}>
-              <td>{item.symbol}</td>
+              <td>
+                <Link to={`/details/${item.symbol}`}>{item.symbol}</Link>
+              </td>
               <td>{item.cname}</td>
               <td>{item.price}</td>
               <td>
