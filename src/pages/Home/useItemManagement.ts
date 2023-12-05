@@ -1,24 +1,26 @@
 import { useState } from 'react';
-import { TItems } from './data';
+import { items, TItems } from './data';
 
-export const useItemManagement = (initialItems : TItems[]) => {
-  const [items, setItems] = useState(initialItems);
+export const useItemManagement = () => {
+  const [data, setItems] = useState(items);
 
   const addItem = (newItem : TItems) => {
-    setItems([...items, newItem]);
+    setItems([...data, newItem]);
   };
 
   const deleteItem = (symbol : string) => {
-    const updatedItems = items.filter((item) => item.symbol !== symbol);
+    const updatedItems = data.filter((item) => item.symbol !== symbol);
     setItems(updatedItems);
   };
 
   const resetData = () => {
-    setItems([...initialItems]);
+    setItems([...items]);
   };
 
+  console.log(data, "data")
+
   return {
-    items,
+    data,
     addItem,
     deleteItem,
     resetData,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FunctionComponent } from "react";
 import styled from "styled-components";
-import { items } from "./data";
+import { items, TItems } from "./data";
+import ItemForm from "./ItemForm";
 import { useItemManagement } from "./useItemManagement";
 
 const ItemListWrapper = styled.div`
@@ -10,11 +11,11 @@ const ItemListWrapper = styled.div`
   gap: 24px;
   @media (max-width: 600px) {
     margin-top: 10px;
-    gap: 8px; 
+    gap: 8px;
     padding: 0 16px;
   }
   @media (max-width: 400px) {
-    margin-top: 5px; 
+    margin-top: 5px;
     font-size: 14px;
   }
 `;
@@ -82,11 +83,23 @@ const Table = styled.table`
 interface ItemListProps {}
 
 const ItemList: FunctionComponent<ItemListProps> = (props) => {
-    const { items : stocks, addItem, deleteItem, resetData } = useItemManagement(items);
+  const { data: stocks, addItem, deleteItem, resetData } = useItemManagement();
+  const [showForm, setShowForm] = useState<boolean>(false);  
+
+  console.log(stocks, "stocks")
+
+  const handleFormClose = () => {
+    setShowForm(false);
+  };
+
+  const handleAddNewData = (formData: TItems) => {
+    console.log(formData, "new data");
+    addItem(formData);
+  };
 
   return (
     <ItemListWrapper>
-      <Button onClick={() => console.log("test")}>Add Item</Button>
+      <Button onClick={() => setShowForm(true)}>Add Item</Button>
       <Button onClick={() => resetData()}>Reset Data</Button>
       <Table>
         <thead>
@@ -110,6 +123,11 @@ const ItemList: FunctionComponent<ItemListProps> = (props) => {
           ))}
         </tbody>
       </Table>
+      <ItemForm
+        show={showForm}
+        onClose={handleFormClose}
+        onSubmit={handleAddNewData}
+      />
     </ItemListWrapper>
   );
 };
