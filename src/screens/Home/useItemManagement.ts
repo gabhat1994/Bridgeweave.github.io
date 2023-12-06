@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { items, TItems } from "./data";
+import { items, TItems } from "../../data";
 
 export const useItemManagement = () => {
   const [data, setItems] = useState<TItems[]>([]);
@@ -26,7 +26,7 @@ export const useItemManagement = () => {
   );
 
   const resetData = () => {
-    // setItems([...items]);
+    setItems([...items]);
   };
 
   console.log(data, "data");

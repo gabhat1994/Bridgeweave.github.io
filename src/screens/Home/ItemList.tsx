@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { items, TItems } from "./data";
+import { items, TItems } from "../../data";
 import ItemForm from "./ItemForm";
 import { useItemManagement } from "./useItemManagement";
 
@@ -81,9 +81,7 @@ const Table = styled.table`
   }
 `;
 
-interface ItemListProps {}
-
-const ItemList: FunctionComponent<ItemListProps> = React.memo((props) => {
+const ItemList: FunctionComponent = React.memo(() => {
   const { data: stocks, addItem, deleteItem, resetData } = useItemManagement();
   const [showForm, setShowForm] = useState<boolean>(false);
 
