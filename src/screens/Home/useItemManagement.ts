@@ -29,8 +29,6 @@ export const useItemManagement = () => {
     setItems([...items]);
   };
 
-  console.log(data, "data");
-
   return {
     data,
     addItem,
