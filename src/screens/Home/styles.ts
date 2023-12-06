@@ -77,7 +77,9 @@ export const Table = styled.table`
 `;
 
 export const Modal = styled.div<{ show: boolean }>`
-  display: ${(props) => (props.show ? "block" : "none")};
+  display: ${(props) => (props.show ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -92,6 +94,9 @@ export const ModalContent = styled.div`
   margin: 100px auto;
   padding: 20px;
   border-radius: 8px;
+  @media (max-width: 600px) {
+    width: auto;
+  }
 `;
 
 export const Form = styled.form`
